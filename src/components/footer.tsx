@@ -92,10 +92,19 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} 4KS Accountancy. All rights reserved.
-          </p>
-        </div>
+  <p className="text-gray-500 text-sm">
+    © {new Date().getFullYear()} 4KS Accountancy. All rights reserved. Powered by{" "}
+    <a
+      href="https://rn-digitalworld.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-[#c9a66b] hover:text-white transition-colors"
+    >
+      RN Digital World
+    </a>
+  </p>
+</div>
+
       </div>
     </footer>
   );
