@@ -1,36 +1,6 @@
-"use client";
-
-import { useState } from "react";
-import { Phone, Mail, MessageCircle, MapPin, Send, CheckCircle } from "lucide-react";
+import { Phone, Mail, MessageCircle, MapPin } from "lucide-react";
 
 export default function ContactPage() {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setStatus("loading");
-
-  try {
-    const response = await fetch("https://formspree.io/f/mbdkvrnd", {
-      method: "POST",
-      body: new FormData(e.currentTarget),
-      headers: {
-        Accept: "application/json",
-      },
-    });
-
-    if (response.ok) {
-      setStatus("success");
-      e.currentTarget.reset();
-    } else {
-      setStatus("error");
-    }
-  } catch {
-    setStatus("error");
-  }
-};
-
-
   return (
     <div className="bg-[#f5f5f5] min-h-screen">
       <section className="bg-gray-900 py-20">
@@ -119,114 +89,92 @@ export default function ContactPage() {
 
             <div className="bg-white rounded-2xl p-8 shadow-sm">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
-
-              {status === "success" ? (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="w-8 h-8 text-green-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Message Sent!</h3>
-                  <p className="text-gray-600">
-                    Thank you for getting in touch. We'll respond within 24 hours.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#c9a66b] focus:border-transparent outline-none transition-all"
-                      placeholder="John Smith"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#c9a66b] focus:border-transparent outline-none transition-all"
-                      placeholder="john@example.com"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="service"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      Service Interest
-                    </label>
-                    <select
-                      id="service"
-                      name="service"
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#c9a66b] focus:border-transparent outline-none transition-all bg-white"
-                    >
-                      <option value="General Enquiry">General Enquiry</option>
-                      <option value="Tax Returns">Tax Returns</option>
-                      <option value="Bookkeeping">Bookkeeping</option>
-                      <option value="Payroll">Payroll Services</option>
-                      <option value="Business Advisory">Business Advisory</option>
-                      <option value="Company Formation">Company Formation</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      Your Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      required
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#c9a66b] focus:border-transparent outline-none transition-all resize-none"
-                      placeholder="Tell us about your accounting needs..."
-                    ></textarea>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className="w-full bg-[#c9a66b] hover:bg-[#b8956a] text-white py-4 rounded-lg font-semibold transition-colors flex items-center justify-center disabled:opacity-50"
+              
+              <form 
+                action="https://formspree.io/f/mbdkvrnd" 
+                method="POST" 
+                className="space-y-6"
+              >
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    {status === "loading" ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        Send Message
-                        <Send className="ml-2 w-5 h-5" />
-                      </>
-                    )}
-                  </button>
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#c9a66b] focus:border-transparent outline-none transition-all"
+                    placeholder="John Smith"
+                  />
+                </div>
 
-                  {status === "error" && (
-                    <p className="text-red-600 text-center">
-                      Something went wrong. Please try again or contact us directly.
-                    </p>
-                  )}
-                </form>
-              )}
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#c9a66b] focus:border-transparent outline-none transition-all"
+                    placeholder="john@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="service"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Service Interest
+                  </label>
+                  <select
+                    id="service"
+                    name="service"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#c9a66b] focus:border-transparent outline-none transition-all bg-white"
+                  >
+                    <option value="General Enquiry">General Enquiry</option>
+                    <option value="Tax Returns">Tax Returns</option>
+                    <option value="Bookkeeping">Bookkeeping</option>
+                    <option value="Payroll">Payroll Services</option>
+                    <option value="Business Advisory">Business Advisory</option>
+                    <option value="Company Formation">Company Formation</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Your Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    required
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#c9a66b] focus:border-transparent outline-none transition-all resize-none"
+                    placeholder="Tell us about your accounting needs..."
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-[#c9a66b] hover:bg-[#b8956a] text-white py-4 rounded-lg font-semibold transition-colors"
+                >
+                  Send Message
+                </button>
+              </form>
             </div>
           </div>
         </div>
