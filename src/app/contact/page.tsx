@@ -95,6 +95,8 @@ export default function ContactPage() {
                 method="POST" 
                 className="space-y-6"
               >
+              <input type="hidden" name="_next" value="https://www.4ksaccountancy.co.uk/contact?success=true" />
+  
                 <div>
                   <label
                     htmlFor="name"
