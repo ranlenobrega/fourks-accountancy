@@ -9,28 +9,27 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   setStatus("loading");
-  const formData = new FormData(e.currentTarget);
 
   try {
     const response = await fetch("https://formspree.io/f/mbdkvrnd", {
       method: "POST",
-      body: formData,
+      body: new FormData(e.currentTarget),
       headers: {
         Accept: "application/json",
       },
     });
 
-
-      if (response.ok) {
-        setStatus("success");
-        e.currentTarget.reset();
-      } else {
-        setStatus("error");
-      }
-    } catch {
+    if (response.ok) {
+      setStatus("success");
+      e.currentTarget.reset();
+    } else {
       setStatus("error");
     }
-  };
+  } catch {
+    setStatus("error");
+  }
+};
+
 
   return (
     <div className="bg-[#f5f5f5] min-h-screen">
