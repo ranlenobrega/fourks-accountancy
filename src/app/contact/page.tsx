@@ -7,26 +7,19 @@ export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus("loading");
-    const formData = new FormData(e.currentTarget);
+  e.preventDefault();
+  setStatus("loading");
+  const formData = new FormData(e.currentTarget);
 
-    try {
-      const response = await fetch(
-        "https://alluring-encouragement-production.up.railway.app/public/lead_v3",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: formData.get("email"),
-            name: formData.get("name"),
-            details: `Service Interest: ${formData.get("service")}\n\nMessage: ${formData.get(
-              "message"
-            )}`,
-            knowledge_profile_id: "c6165eb5-c75c-45fe-ad44-a3ddab52998e",
-          }),
-        }
-      );
+  try {
+    const response = await fetch("https://formspree.io/f/mbdkvrnd", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
 
       if (response.ok) {
         setStatus("success");
